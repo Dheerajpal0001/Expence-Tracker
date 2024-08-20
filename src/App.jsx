@@ -30,14 +30,14 @@ function App() {
       setIncome(initialIncome);
       setExpense(initialExpense);
       setBalance(initialIncome - initialExpense);
-      setState(initialIncome - initialExpense > 0 ? 'Profit😎' : initialIncome - initialExpense === 0 ? 'Neutral' : 'Loss🤦‍♂️');
+      setState(initialIncome - initialExpense > 0 ? 'Profit😎' : initialIncome - initialExpense === 0 ? 'Neutral😑 ' : 'Loss🤦‍♂️');
     }
   }, []);
 
   useEffect(() => {
     const newBalance = income - expense;
     setBalance(newBalance);
-    setState(newBalance > 0 ? 'Profit😎' : newBalance === 0 ? 'Neutral' : 'Loss🤦‍♂️');
+    setState(newBalance > 0 ? 'Profit😎' : newBalance === 0 ? 'Neutral😑 ' : 'Loss🤦‍♂️');
   }, [income, expense]);
 
   const addTransaction = (e) => {
@@ -72,7 +72,6 @@ function App() {
       const updatedTransactions = prevTransactions.filter(t => t.id !== id);
       localStorage.setItem('transactions', JSON.stringify(updatedTransactions));
 
-      // Recalculate income and expense
       const updatedIncome = updatedTransactions
         .filter(t => t.type === 'income')
         .reduce((sum, t) => sum + t.amount, 0);
